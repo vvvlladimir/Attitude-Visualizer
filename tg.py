@@ -3,13 +3,11 @@ import time
 from datetime import datetime
 
 import openai
-import tiktoken
 from telethon import TelegramClient
 
 from config import *
 
-aiON = False
-maxTokenLimit = 550
+AI = False
 limit = 5
 offset = 30
 tgID = "rbc_news"
@@ -20,22 +18,20 @@ openai.api_key = api_key
 dataList = []
 totalReactions = []
 
-with open("data/emoji_scores.json", "r") as file:
+with open("emoji_scores.json", "r") as file:
     emojiScores = json.load(file)
 
 
-def getMainIdea(text):
-    encoding = tiktoken.encoding_for_model(modelName)
-    num_tokens = len(encoding.encode(text))
-    print(num_tokens)
-    if not aiON or num_tokens > maxTokenLimit:
-        return text[:50]
+def getTags(text):
+    if not AI:
+        return "-"
 
     response = openai.Completion.create(
         engine=modelName,
-        prompt=f"Summarize the following text in your own words in a very short sentence.:\n\n{text}",
-        max_tokens=50
+        prompt=f"print one hashtag that describes the text as accurately as possible:\n\n{text}",
+        max_tokens=5
     )
+
     return response.choices[0].text.strip()
 
 
@@ -54,21 +50,24 @@ def normalizeTotalReactions(totalReactions):
     return normalized_counts
 
 
-def saveToJson(summary, id, reactionsList, emojiScores, reactionCounts, date):
+def saveToJson(text, tags, id, reactionsList, emojiScores, reactionCounts, date):
     tgLink = f"https://t.me/{tgID}/{id}"
     sum_values = 0
     emojiDict = {}
     for emoji in reactionsList:
         key = emoji[0]
-        value = round(emoji[1] * emojiScores.get(emoji[0], None), 2)
+        if emoji[0] not in emojiScores:
+            value = emoji[1]
+        else: value = round(emoji[1] * emojiScores.get(emoji[0], None), 2)
         sum_values += value
         emojiDict[key] = value
 
     totalReactions.append(round(sum_values, 2))
 
     data = {
-        "date": str(date.strftime("%d-%m-%Y %H:%M:%S")),
-        "summary": summary,
+        "pc_date": str(date.strftime("%d-%m-%Y %H:%M:%S")),
+        "pc_text": text,
+        "tags": tags,
         'tg_link': tgLink,
         "emojis": emojiDict,
         "total_reactions": reactionCounts,
@@ -89,13 +88,13 @@ def writeToFile(norm_sum):
     currentDate = str(datetime.now().date().strftime("%d-%m-%Y"))
     currentTime = str(datetime.now().time().strftime("%H:%M:%S"))
     data_dict = {
+        'tgID': tgID,
         'date': currentDate,
         'time': currentTime,
         'data': sortList
     }
 
-
-    with open('data/parce_rbc.json', 'w') as json_file:
+    with open(f'data/parce_{tgID}.json', 'w') as json_file:
         json.dump(data_dict, json_file, ensure_ascii=False, indent=4)
 
 
@@ -106,7 +105,7 @@ async def main():
         for message in messages:
             reactionsList = []
             reactionCounts = 0
-            summary = getMainIdea(message.text)
+            tags = getTags(message.text)
 
             for reaction_count in message.reactions.results:
                 emoticon = reaction_count.reaction.emoticon
@@ -115,11 +114,12 @@ async def main():
                 reactionCounts += count
                 reactionsList.append([emoticon, count])
 
-            saveToJson(summary, message.id, reactionsList, emojiScores, reactionCounts, message.date)
-            time.sleep(1)
+            saveToJson(message.text, tags, message.id, reactionsList, emojiScores, reactionCounts, message.date)
+            time.sleep(.3)
 
     norm_sum = normalizeTotalReactions(totalReactions)
     writeToFile(norm_sum)
 
+
 with client:
-   client.loop.run_until_complete(main())
+    client.loop.run_until_complete(main())
