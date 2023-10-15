@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attitude Visualiser</title>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+<body data-oc="#ff5733,#ff5733">
+<div class="container">
+    <div class="row">
+        <div class="box">
+            <ul class="">
+                <li class="item-1">EMOJI</li>
+                <li class="item-2">😂</li>
+                <li class="item-3">🤬</li>
+                <li class="item-4">👍</li>
+                <li class="item-5">❤️</li>
+                <li class="item-6">🥲</li>
+                <li class="item-7">😭</li>
+                <li class="item-8">Attitude</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <h1 class="col-5 logo">
+            Visualizer
+        </h1>
+        <p class="col-7 header_text">
+            The <span>X</span> coordinate shows the attitude of people to the post.<br>
+            The <span>Y</span> coordinate shows the popularity of each post - number of reactions.
+        </p>
+    </div>
+    <div class="row chart">
+        <div class="col-3 settings_menu">
+            <div class="row">
+                <div class="col time">
+                    <span>12:54</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col menu_text">
+                    <p>Last update:</p>
+                </div>
+                <div class="col date">
+                    <p>10.10.2023</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-9 chart_table">
+            <!--            <div class="gradient"></div>-->
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+
+
+</div>
+
+
+<!-- CHARTJS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- BOOTSTRAP -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+<!-- JS -->
+<script src="/static/app.js"></script>
+<script src="/static/chartJS.js"></script>
+<script src="/node_modules/overflow-color/dist/overflow-color.umd.min.js" async></script>
+
+</body>
+</html>
