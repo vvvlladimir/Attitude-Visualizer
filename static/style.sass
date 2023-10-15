@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Cutive&family=Cutive+Mono&family=Gemunu+Libre:wght@200;400&family=Inter:wght@500&family=Overpass:ital,wght@0,400;1,300;1,600&family=Poly&display=swap')
+$HeaderFont: 'Cutive', serif
+$subFont: 'Cutive Mono', monospace
+$clockFont: 'Gemunu Libre', sans-serif
+$subPlainFont: 'Inter', sans-serif
+$subHeaderFont: 'Overpass', sans-serif
+$plainFont: 'Poly', serif
+
+$mainColor: #FF5733
+$fontColor: #000
+$shadow-color: rgba(5, 5, 5)
+$gradientColor: rgba(255, 87, 51, 0.16) 0%
+
+
+$item-count: 8
+$item: 1 / $item-count
+$scrollColor: rgba(255, 255, 255, 0)
+
+body
+  p, h1, h2, h3, h4, h5, h6
+    margin: 0
+
+
+.box
+  max-height: 2.5rem
+  margin-top: 2rem !important
+  overflow: hidden
+  position: relative
+
+  &::before
+    top: 0
+    left: 0
+    z-index: -1
+    content: ''
+    background: $scrollColor
+
+  &::after
+    @extend ::before
+    top: auto
+    bottom: 0
+
+ul
+  padding-left: 0 !important
+  margin-bottom: 0 !important
+
+  li
+    color: $fontColor
+    font-family: $subFont
+    font-size: 3rem
+    font-style: normal
+    font-weight: 100
+    line-height: normal
+    text-transform: uppercase
+
+@keyframes fadeOut
+  from
+    opacity: 1
+  to
+    opacity: 0
+
+@keyframes scrollUp
+  from
+    transform: translateY(0)
+  to
+    transform: translateY((-100% / $item-count) * ($item-count - 0.85))
+
+
+.logo
+  color: $mainColor
+  font-family: $HeaderFont
+  font-size: 3.375rem
+  font-style: normal
+  font-weight: 400
+  line-height: inherit
+  text-transform: uppercase
+
+.header_text
+  color: $fontColor
+  leading-trim: both
+  text-align: right
+  font-weight: 300
+  font-family: $subHeaderFont
+  font-size: 1.4rem
+  font-style: italic
+  line-height: normal
+
+  span
+    font-weight: 600
+
+.chart
+  margin-top: 9rem !important
+  padding-bottom: 4rem !important
+  z-index: 3 !important
+
+.settings_menu
+  margin-top: 1.5rem !important
+  padding-top: 0.4rem
+  width: 100%
+  max-height: 28.5rem
+  flex-shrink: 0
+  box-shadow: 0px 7px 15px rgba(5, 5, 5, 0.08), 0px 27px 27px rgba(5, 5, 5, 0.07), 0px 60px 36px rgba(5, 5, 5, 0.04), 0px 107px 43px rgba(5, 5, 5, 0.01), 0px 168px 47px rgba(5, 5, 5, 0.00)
+
+.menu_text
+  color: $fontColor
+  font-family: $subHeaderFont
+  font-size: 1.125rem
+  font-style: normal
+  font-weight: 400
+  line-height: normal
+  text-transform: capitalize
+  align-self: end
+
+
+.time
+  color: $fontColor
+  text-align: end
+  font-family: $clockFont
+  font-size: 1.25rem
+  font-style: normal
+  font-weight: 200
+  line-height: normal
+  text-transform: uppercase
+
+.date
+  @extend .time
+  font-size: 2.5rem
+  font-weight: 400
+
+.chart_table
+  position: relative
+  z-index: 1
+
+  div
+    position: absolute
+    top: 2rem
+    left: 3.5rem
+    width: 93%
+    height: 91.5%
+    background: linear-gradient(to right, rgba(255, 87, 51, 0.16) 0%, rgba(255, 0, 0, 0) 100%)
+    z-index: -1
+
+
+
