@@ -11,7 +11,7 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 <body data-oc="#ff5733,#ff5733">
-<div class="container">
+<div class="container main-content">
     <div class="row">
         <div class="box">
             <ul class="">
@@ -50,14 +50,74 @@
                     <p>10.10.2023</p>
                 </div>
             </div>
+            <form action="/take_reactions/" method="post" class="menu_text form-block">
+                <div class="row ">
+                    <div class="col">
+                        <p>Telegram ID:</p>
+                    </div>
+                    <div class="col">
+                        <input type="number" name="telegram_id" value="{{ data.telegram_id }}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>Telegram Hash:</p>
+                    </div>
+                    <div class="col">
+                        <input type="text" name="telegram_hash" value="{{data.telegram_hash}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>Post Limit:</p>
+                    </div>
+                    <div class="col">
+                        <input type="number" name="post_limit" value="{{data.post_limit}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>Post Offset:</p>
+                    </div>
+                    <div class="col">
+                        <input type="number" name="post_offset" value="{{data.post_offset}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>Channel Link:</p>
+                    </div>
+                    <div class="col">
+                        <input type="text" name="channel_link" value="{{data.channel_link}}">
+                    </div>
+                </div>
+                <div class="row start-button">
+                    <div class="col text-center">
+                        <input type="submit" value="start"></input>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col">
+                        <p>Your Json Files:</p>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="col-9 chart_table">
-            <!--            <div class="gradient"></div>-->
+        <div class="col-9 chart-table">
             <canvas id="myChart"></canvas>
         </div>
     </div>
+</div>
 
-
+<div class="container-fluid">
+    <div class="row footer">
+        <div class="col-1"><span>2023</span></div>
+        <div class="col-10 text-center">
+            <p>Attitude Visualisier by <a href="https://github.com/vvvlladimir/Reactions-Visualizer" target="_blank"
+                                          rel="noopener noreferrer">@vvvlladimir</a>
+            </p>
+        </div>
+    </div>
 </div>
 
 
@@ -71,7 +131,14 @@
 
 <!-- JS -->
 <script src="/static/app.js"></script>
+
+<!-- FONTAWSOME -->
+<script src="https://kit.fontawesome.com/6a1110868c.js" crossorigin="anonymous"></script>
+
+<!-- CHART JS -->
 <script src="/static/chartJS.js"></script>
+
+<!-- OVERFLOW -->
 <script src="/node_modules/overflow-color/dist/overflow-color.umd.min.js" async></script>
 
 </body>

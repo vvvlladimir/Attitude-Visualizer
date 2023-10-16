@@ -1,6 +1,7 @@
 const ctx = document.getElementById('myChart');
 const colors = ['blue', 'red', 'green', 'black'];
-const gradientColors = ['rgba(255, 87, 51, 0.16)', 'rgba(216, 8, 8, 0.00)']
+const gradientColors = ['rgba(255, 87, 51, 0.16)', 'rgba(216, 8, 8, 0.00)'];
+const gridColor = "rgba(33,33,33,0.22)";
 const maxLength = 50;
 
 const gradientBackgroundColor = {
@@ -24,6 +25,14 @@ const optionsBubble = {
         x: {
             ticks: {
                 display: false
+            },
+            grid: {
+                color: gridColor
+            }
+        },
+        y: {
+            grid: {
+                color: gridColor
             }
         }
     },

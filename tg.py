@@ -8,12 +8,15 @@ from telethon import TelegramClient
 from config import *
 
 AI = False
-limit = 500
-offset = 30
-tgID = "rozetked"
 modelName = 'text-davinci-002'
 
-client = TelegramClient('tg_parcer', api_id, api_hash)
+# post_limit = 0
+# post_offset = 0
+# channel_link = ""
+# telegram_id = 0
+# telegram_hash = ''
+
+
 openai.api_key = api_key
 
 
@@ -47,7 +50,9 @@ def normalize_array(sum_array):
 
 
 def standardize_array(sum_array):
-    """Standardize the array to have mean 0 and standard deviation 1."""
+    if len(sum_array) == 0:
+        sum_array.append(0)
+        return sum_array
 
     mean_value = sum(sum_array) / len(sum_array)
     std_dev = (sum([(x - mean_value) ** 2 for x in sum_array]) / len(sum_array)) ** 0.5
@@ -61,7 +66,7 @@ def standardize_array(sum_array):
     return standardized_counts
 
 
-def save_to_json(message, emoji_scores):
+def save_to_json(message, emoji_scores, channel_link):
     """Extract relevant data from a message and store it in a dictionary format."""
     reactions_list = []
     reaction_counts = 0
@@ -79,20 +84,20 @@ def save_to_json(message, emoji_scores):
         "pc_date": str(message.date.strftime("%d-%m-%Y %H:%M:%S")),
         "pc_text": message.text,
         "tags": tags,
-        'tg_link': f"https://t.me/{tgID}/{message.id}",
+        'tg_link': f"https://t.me/{channel_link}/{message.id}",
         "emojis": {emoji[0]: round(emoji[1] * emoji_scores.get(emoji[0], 1), 2) for emoji in reactions_list},
         "total_reactions": reaction_counts,
         "sum": round(sum_values, 2)
     }
 
 
-def write_to_file(data_list, norm_sum):
+def write_to_file(data_list, norm_sum, channel_link):
     """Save the processed data to a JSON file."""
     for idx, item in enumerate(data_list):
         item['norm_sum'] = norm_sum[idx]
 
     data_dict = {
-        'tgID': tgID,
+        'tgID': channel_link,
         'date': datetime.now().date().strftime("%d-%m-%Y"),
         'time': datetime.now().time().strftime("%H:%M:%S"),
         'norm_sum_min': min(norm_sum),
@@ -100,15 +105,29 @@ def write_to_file(data_list, norm_sum):
         'data': sorted(data_list, key=lambda x: x['norm_sum']),
     }
 
-    filename = f'data/parce_{tgID}_{datetime.today().strftime("%d%m%y%H%M")}.json'
+    filename = f'data/parce_{channel_link}_{datetime.today().strftime("%d%m%y%H%M")}.json'
     with open(filename, 'w') as json_file:
         json.dump(data_dict, json_file, ensure_ascii=False, indent=4)
 
 
 async def main():
+    with open("config.json", "r") as file:
+        data = json.load(file)
+
+    telegram_id = data["telegram_id"]
+    telegram_hash = data["telegram_hash"]
+    post_limit = data["post_limit"]
+    post_offset = data["post_offset"]
+    channel_link = data["channel_link"]
+
+    if channel_link.startswith("@"):
+        channel_link = channel_link[1:]
+
+    client = TelegramClient('tg_parcer', telegram_id, telegram_hash)
+
     """Main asynchronous function to fetch and process telegram messages."""
     async with client:
-        messages = await client.get_messages(f"@{tgID}", limit, add_offset=offset)
+        messages = await client.get_messages(f"@{channel_link}", post_limit, add_offset=post_offset)
 
         with open("emoji_scores.json", "r") as file:
             emoji_scores = json.load(file)
@@ -116,13 +135,13 @@ async def main():
         data_list = []
         for message in messages:
             if message.reactions:
-                data_list.append(save_to_json(message, emoji_scores))
+                data_list.append(save_to_json(message, emoji_scores, channel_link))
                 time.sleep(.3)
         sum_array = [item["sum"] for item in data_list]
 
         norm_sum = standardize_array(sum_array)
-        write_to_file(data_list, norm_sum)
+        write_to_file(data_list, norm_sum, channel_link)
 
-
-with client:
-    client.loop.run_until_complete(main())
+#
+# with client:
+#     client.loop.run_until_complete(main())
