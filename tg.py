@@ -81,7 +81,7 @@ def save_to_json(message, emoji_scores, channel_link):
     sum_values = sum([emoji[1] * emoji_scores.get(emoji[0], 1) for emoji in reactions_list])
 
     return {
-        "pc_date": str(message.date.strftime("%d-%m-%Y %H:%M:%S")),
+        "pc_date": str(message.date.strftime("%d.%m.%Y %H:%M")),
         "pc_text": message.text,
         "tags": tags,
         'tg_link': f"https://t.me/{channel_link}/{message.id}",
@@ -91,21 +91,21 @@ def save_to_json(message, emoji_scores, channel_link):
     }
 
 
-def write_to_file(data_list, norm_sum, channel_link):
+def write_to_file(data_list, norm_sum, channel_link, post_limit):
     """Save the processed data to a JSON file."""
     for idx, item in enumerate(data_list):
         item['norm_sum'] = norm_sum[idx]
 
     data_dict = {
         'tgID': channel_link,
-        'date': datetime.now().date().strftime("%d-%m-%Y"),
-        'time': datetime.now().time().strftime("%H:%M:%S"),
+        'date': datetime.now().date().strftime("%d.%m.%Y"),
+        'time': datetime.now().time().strftime("%H:%M"),
         'norm_sum_min': min(norm_sum),
         'norm_sum_max': max(norm_sum),
         'data': sorted(data_list, key=lambda x: x['norm_sum']),
     }
 
-    filename = f'data/parce_{channel_link}_{datetime.today().strftime("%d%m%y%H%M")}.json'
+    filename = f'data/{channel_link}_{datetime.today().strftime("%H-%M_%d-%m-%Y")}_{post_limit}.json'
     with open(filename, 'w') as json_file:
         json.dump(data_dict, json_file, ensure_ascii=False, indent=4)
 
@@ -140,7 +140,7 @@ async def main():
         sum_array = [item["sum"] for item in data_list]
 
         norm_sum = standardize_array(sum_array)
-        write_to_file(data_list, norm_sum, channel_link)
+        write_to_file(data_list, norm_sum, channel_link, post_limit)
 
 #
 # with client:

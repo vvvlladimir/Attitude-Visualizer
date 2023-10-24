@@ -14,7 +14,7 @@
 <div class="container main-content">
     <div class="row">
         <div class="box">
-            <ul class="">
+            <ul class="subHeader">
                 <li class="item-1">EMOJI</li>
                 <li class="item-2">😂</li>
                 <li class="item-3">🤬</li>
@@ -39,56 +39,44 @@
         <div class="col-3 settings_menu">
             <div class="row">
                 <div class="col time">
-                    <span>12:54</span>
+                    <span id="jsonTime">12:54</span>
                 </div>
             </div>
             <div class="row">
-                <div class="col menu_text">
-                    <p>Last update:</p>
-                </div>
-                <div class="col date">
-                    <p>10.10.2023</p>
+                <div class="col menu_text d-flex">
+                    <p class="flex-grow-1 align-self-end">Last update:</p>
+                    <p id="jsonDate" class="date">10.10.2023</p>
                 </div>
             </div>
             <form action="/take_reactions/" method="post" class="menu_text form-block">
                 <div class="row ">
-                    <div class="col">
-                        <p>Telegram ID:</p>
-                    </div>
-                    <div class="col">
-                        <input type="number" name="telegram_id" value="{{ data.telegram_id }}">
+                    <div class="col d-flex">
+                        <p class="flex-grow-1">Telegram ID:</p>
+                        <input type="password" name="telegram_id" value="{{config.telegram_id}}">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
-                        <p>Telegram Hash:</p>
-                    </div>
-                    <div class="col">
-                        <input type="text" name="telegram_hash" value="{{data.telegram_hash}}">
+                    <div class="col d-flex">
+                        <p class="flex-grow-1">Telegram Hash:</p>
+                        <input type="password" name="telegram_hash" value="{{config.telegram_hash}}">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
-                        <p>Post Limit:</p>
-                    </div>
-                    <div class="col">
-                        <input type="number" name="post_limit" value="{{data.post_limit}}">
+                    <div class="col d-flex">
+                        <p class="flex-grow-1">Post Limit:</p>
+                        <input type="number" name="post_limit" value="{{config.post_limit}}">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
-                        <p>Post Offset:</p>
-                    </div>
-                    <div class="col">
-                        <input type="number" name="post_offset" value="{{data.post_offset}}">
+                    <div class="col d-flex">
+                        <p class="flex-grow-1">Post Offset:</p>
+                        <input type="number" name="post_offset" value="{{config.post_offset}}">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
-                        <p>Channel Link:</p>
-                    </div>
-                    <div class="col">
-                        <input type="text" name="channel_link" value="{{data.channel_link}}">
+                    <div class="col d-flex">
+                        <p class="flex-grow-1">Channel Link:</p>
+                        <input type="text" name="channel_link" value="{{config.channel_link}}">
                     </div>
                 </div>
                 <div class="row start-button">
@@ -96,14 +84,26 @@
                         <input type="submit" value="start"></input>
                     </div>
                 </div>
-                <div class="row mt-2">
-                    <div class="col">
-                        <p>Your Json Files:</p>
-                    </div>
-                </div>
             </form>
+            <div class="row mt-xl-2 mb-1">
+                <div class="col">
+                    <p>Your JSON Files:</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <ul class="files-content">
+                        {% for file in files %}
+                        <li class="d-flex">
+                            <a href="/download/{{ file }}" class="flex-grow-1">{{ file }}</a>
+                            <button onclick="deleteFile('{{ file }}')" class="">Delete</button>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="col-9 chart-table">
+        <div class="col-9">
             <canvas id="myChart"></canvas>
         </div>
     </div>
@@ -131,9 +131,6 @@
 
 <!-- JS -->
 <script src="/static/app.js"></script>
-
-<!-- FONTAWSOME -->
-<script src="https://kit.fontawesome.com/6a1110868c.js" crossorigin="anonymous"></script>
 
 <!-- CHART JS -->
 <script src="/static/chartJS.js"></script>

@@ -1,13 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Cutive&family=Cutive+Mono&family=Gemunu+Libre:wght@200;400&family=Inter:wght@500&family=Overpass:ital,wght@0,400;1,300;1,600&family=Poly&display=swap')
-$HeaderFont: 'Cutive', serif
+@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Gemunu+Libre:wght@200;400&family=Overpass:ital,wght@0,400;1,200;1,600&family=Ubuntu:wght@300;500&display=swap')
+// Variables
+$HeaderFont: 'Ubuntu', serif
 $subFont: 'Cutive Mono', monospace
 $clockFont: 'Gemunu Libre', sans-serif
-$subPlainFont: 'Inter', sans-serif
 $subHeaderFont: 'Overpass', sans-serif
-$plainFont: 'Poly', serif
 
 $mainColor: #FF5733
-$fontColor: #000
+$subColor: #000
 $shadow-color: rgba(5, 5, 5)
 $gradientColor: rgba(255, 87, 51, 0.16) 0%
 
@@ -16,6 +15,11 @@ $item-count: 8
 $item: 1 / $item-count
 $scrollColor: rgba(255, 255, 255, 0)
 
+@mixin media($width)
+  @media (max-width: $width)
+    @content
+
+// Animations
 @keyframes fadeOut
   from
     opacity: 1
@@ -39,13 +43,14 @@ $scrollColor: rgba(255, 255, 255, 0)
   100%
     opacity: 1
 
+// Basic Settings
 body
-  p, h1, h2, h3, h4, h5, h6
+  p, h1, h2, h3, h4, h5, h6, ul, li
     margin: 0
+    padding: 0
 
-.main-content
-  min-height: 100vh + 0.5vh
 
+// HEADER
 .box
   max-height: 2.5rem
   margin-top: 2rem !important
@@ -64,14 +69,14 @@ body
     top: auto
     bottom: 0
 
-ul
+.subHeader
   padding-left: 0 !important
   margin-bottom: 0 !important
   animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both
 
 
   li
-    color: $fontColor
+    color: $subColor
     font-family: $subFont
     font-size: 3rem
     font-style: normal
@@ -79,44 +84,64 @@ ul
     line-height: normal
     text-transform: uppercase
 
+    @include media(992px)
+      font-size: 2.5rem
+
 .logo
   color: $mainColor
   font-family: $HeaderFont
-  font-size: 3.375rem
+  font-size: 4rem
   font-style: normal
-  font-weight: 400
-  line-height: inherit
+  font-weight: 500
+  line-height: 0.7
   text-transform: uppercase
   animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both
 
+  @include media(992px)
+    font-size: 3.5rem
+
+
 .header_text
-  color: $fontColor
+  color: $subColor
   leading-trim: both
   text-align: right
-  font-weight: 300
+  font-weight: 200
   font-family: $subHeaderFont
   font-size: 1.4rem
   font-style: italic
   line-height: normal
 
+  @include media(1200px)
+    font-size: 1.2rem
+
+  @include media(992px)
+    font-size: 1rem
+
   span
     font-weight: 600
 
+// CHART
 .chart
-  margin-top: 10rem !important
+  margin-top: 13vh !important
+  @include media(992px)
+    margin-top: 7vh !important
 
+
+// FORM
 .settings_menu
   margin-top: 1.5rem !important
   padding-top: 0.4rem
+  padding-bottom: 0.4rem
   width: 100%
   max-height: 28.5rem
   flex-shrink: 0
   border-radius: 0.4375rem
-  border: 1px solid #000
+  border: 1px solid $subColor
   background: #FFF
 
+
 .menu_text
-  color: $fontColor
+  color: $subColor
   font-family: $subHeaderFont
   font-size: 1.125rem
   font-style: normal
@@ -125,9 +150,12 @@ ul
   text-transform: capitalize
   align-self: end
 
+  @include media(1200px)
+    font-size: 0.95rem
+
 
 .time
-  color: $fontColor
+  color: $subColor
   text-align: end
   font-family: $clockFont
   font-size: 1.25rem
@@ -136,46 +164,52 @@ ul
   line-height: normal
   text-transform: uppercase
 
+
+  @include media(992px)
+    font-size: 1rem
+
+
 .date
   @extend .time
   font-size: 2.5rem
   font-weight: 400
 
-.footer
-  margin-top: 1rem !important
-  padding: 0.75rem 0 0.75rem 0
-  background-color: $mainColor
-  color: #fff
-  font-family: $subHeaderFont
-  font-size: 0.9375rem
-  font-style: normal
-  font-weight: 400
-  line-height: normal
+  @include media(992px)
+    font-size: 1.5rem
 
-  a
-    color: white
-    text-decoration: none
-
-    &:hover
-      text-decoration: underline
+  @include media(1200px)
+    font-size: 1.6rem
 
 .form-block
   margin-top: 2rem
 
+  @include media(992px)
+    margin-top: 1rem
+  @include media(1200px)
+    margin-top: 1.5rem
+
+
   input
-    width: 9.375rem
+    width: 9rem
     height: 1.375rem
     flex-shrink: 0
     border-radius: 0.25rem
-    border: 1px solid #000
+    border: 1px solid $subColor
     margin-bottom: 0.8rem
+
+    @include media(1200px)
+      width: 6.4rem
+      margin-bottom: 0.3rem
+
 
 .start-button
   padding-top: 1rem
+  @include media(992px)
+    padding-top: 0.5rem
 
   input
     border-radius: 0.25rem
-    background: #000
+    background: $subColor
     height: 1.4rem
     color: white
     width: 100%
@@ -184,3 +218,50 @@ ul
     font-style: normal
     font-weight: 400
     line-height: normal
+
+.files-content
+  color: $subColor
+  font-family: $HeaderFont
+  font-size: 0.75rem
+  font-style: normal
+  font-weight: 300
+  line-height: normal
+
+  a
+    padding-left: 0.25rem
+    color: $subColor
+    text-decoration: none
+
+    &:hover
+      text-decoration: underline
+
+  button
+    color: $mainColor
+    font-size: 0.75rem
+    border: none
+    background-color: transparent
+
+    &:hover
+      text-decoration: underline
+
+// FOOTER
+.footer
+  bottom: 0
+  margin-top: 4rem !important
+  padding: 0.75rem 0 0.75rem 0
+  background-color: $mainColor
+  color: #fff
+  font-family: $subHeaderFont
+  font-size: 0.95rem
+  font-style: normal
+  font-weight: 400
+  line-height: normal
+  height: 100%
+
+  a
+    color: white
+    text-decoration: none
+
+    &:hover
+      text-decoration: underline
+

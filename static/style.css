@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cutive&family=Cutive+Mono&family=Gemunu+Libre:wght@200;400&family=Inter:wght@500&family=Overpass:ital,wght@0,400;1,300;1,600&family=Poly&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Gemunu+Libre:wght@200;400&family=Overpass:ital,wght@0,400;1,200;1,600&family=Ubuntu:wght@300;500&display=swap");
 @keyframes fadeOut {
   from {
     opacity: 1;
@@ -27,12 +27,9 @@
     opacity: 1;
   }
 }
-body p, body h1, body h2, body h3, body h4, body h5, body h6 {
+body p, body h1, body h2, body h3, body h4, body h5, body h6, body ul, body li {
   margin: 0;
-}
-
-.main-content {
-  min-height: 100.5vh;
+  padding: 0;
 }
 
 .box {
@@ -53,12 +50,12 @@ body p, body h1, body h2, body h3, body h4, body h5, body h6 {
   bottom: 0;
 }
 
-ul {
+.subHeader {
   padding-left: 0 !important;
   margin-bottom: 0 !important;
   animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
 }
-ul li {
+.subHeader li {
   color: #000;
   font-family: "Cutive Mono", monospace;
   font-size: 3rem;
@@ -67,39 +64,65 @@ ul li {
   line-height: normal;
   text-transform: uppercase;
 }
+@media (max-width: 992px) {
+  .subHeader li {
+    font-size: 2.5rem;
+  }
+}
 
 .logo {
   color: #FF5733;
-  font-family: "Cutive", serif;
-  font-size: 3.375rem;
+  font-family: "Ubuntu", serif;
+  font-size: 4rem;
   font-style: normal;
-  font-weight: 400;
-  line-height: inherit;
+  font-weight: 500;
+  line-height: 0.7;
   text-transform: uppercase;
   animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+}
+@media (max-width: 992px) {
+  .logo {
+    font-size: 3.5rem;
+  }
 }
 
 .header_text {
   color: #000;
   leading-trim: both;
   text-align: right;
-  font-weight: 300;
+  font-weight: 200;
   font-family: "Overpass", sans-serif;
   font-size: 1.4rem;
   font-style: italic;
   line-height: normal;
+}
+@media (max-width: 1200px) {
+  .header_text {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 992px) {
+  .header_text {
+    font-size: 1rem;
+  }
 }
 .header_text span {
   font-weight: 600;
 }
 
 .chart {
-  margin-top: 10rem !important;
+  margin-top: 13vh !important;
+}
+@media (max-width: 992px) {
+  .chart {
+    margin-top: 7vh !important;
+  }
 }
 
 .settings_menu {
   margin-top: 1.5rem !important;
   padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
   width: 100%;
   max-height: 28.5rem;
   flex-shrink: 0;
@@ -118,6 +141,11 @@ ul li {
   text-transform: capitalize;
   align-self: end;
 }
+@media (max-width: 1200px) {
+  .menu_text {
+    font-size: 0.95rem;
+  }
+}
 
 .time, .date {
   color: #000;
@@ -129,45 +157,62 @@ ul li {
   line-height: normal;
   text-transform: uppercase;
 }
+@media (max-width: 992px) {
+  .time, .date {
+    font-size: 1rem;
+  }
+}
 
 .date {
   font-size: 2.5rem;
   font-weight: 400;
 }
-
-.footer {
-  margin-top: 1rem !important;
-  padding: 0.75rem 0 0.75rem 0;
-  background-color: #FF5733;
-  color: #fff;
-  font-family: "Overpass", sans-serif;
-  font-size: 0.9375rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+@media (max-width: 992px) {
+  .date {
+    font-size: 1.5rem;
+  }
 }
-.footer a {
-  color: white;
-  text-decoration: none;
-}
-.footer a:hover {
-  text-decoration: underline;
+@media (max-width: 1200px) {
+  .date {
+    font-size: 1.6rem;
+  }
 }
 
 .form-block {
   margin-top: 2rem;
 }
+@media (max-width: 992px) {
+  .form-block {
+    margin-top: 1rem;
+  }
+}
+@media (max-width: 1200px) {
+  .form-block {
+    margin-top: 1.5rem;
+  }
+}
 .form-block input {
-  width: 9.375rem;
+  width: 9rem;
   height: 1.375rem;
   flex-shrink: 0;
   border-radius: 0.25rem;
   border: 1px solid #000;
   margin-bottom: 0.8rem;
 }
+@media (max-width: 1200px) {
+  .form-block input {
+    width: 6.4rem;
+    margin-bottom: 0.3rem;
+  }
+}
 
 .start-button {
   padding-top: 1rem;
+}
+@media (max-width: 992px) {
+  .start-button {
+    padding-top: 0.5rem;
+  }
 }
 .start-button input {
   border-radius: 0.25rem;
@@ -180,6 +225,53 @@ ul li {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+.files-content {
+  color: #000;
+  font-family: "Ubuntu", serif;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+.files-content a {
+  padding-left: 0.25rem;
+  color: #000;
+  text-decoration: none;
+}
+.files-content a:hover {
+  text-decoration: underline;
+}
+.files-content button {
+  color: #FF5733;
+  font-size: 0.75rem;
+  border: none;
+  background-color: transparent;
+}
+.files-content button:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  bottom: 0;
+  margin-top: 4rem !important;
+  padding: 0.75rem 0 0.75rem 0;
+  background-color: #FF5733;
+  color: #fff;
+  font-family: "Overpass", sans-serif;
+  font-size: 0.95rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  height: 100%;
+}
+.footer a {
+  color: white;
+  text-decoration: none;
+}
+.footer a:hover {
+  text-decoration: underline;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,8 +1,13 @@
 const ctx = document.getElementById('myChart');
-const colors = ['blue', 'red', 'green', 'black'];
+const pointColors = ['rgba(17, 42, 70, 1)', 'rgba(89, 167, 137, 1)', 'rgba(95, 50, 252, 1)', 'rgba(206,194,40, 1)', 'rgba(167, 102, 89, 1)'];
 const gradientColors = ['rgba(255, 87, 51, 0.16)', 'rgba(216, 8, 8, 0.00)'];
 const gridColor = "rgba(33,33,33,0.22)";
 const maxLength = 50;
+
+function changeAlpha(rgbaString, newAlpha) {
+    return rgbaString.replace(/[\d.]+\)$/g, newAlpha + ')');
+}
+
 
 const gradientBackgroundColor = {
     id: 'gradientBackgroundColor',
@@ -20,6 +25,7 @@ const gradientBackgroundColor = {
     }
 }
 const optionsBubble = {
+    maintainAspectRatio: false,
     responsive: true,
     scales: {
         x: {
@@ -115,8 +121,8 @@ function createDatasets(allData) {
             emojis: item.emojis
         })),
         // Assign a color to each dataset.
-        pointBorderColor: colors[index],
-        // backgroundColor: colors[index]
+        pointBorderColor: pointColors[index],
+        backgroundColor: changeAlpha(pointColors[index], 0.5)
     }));
 }
 
@@ -145,6 +151,7 @@ function createChart(ctx, chartData, type, options) {
 async function init() {
     try {
         const {files: filenames} = await fetchData('/list_files/');
+        console.log(filenames);
         const allData = await fetchAllFilesData(filenames);
         const datasets = createDatasets(allData);
         const chart = createChart(ctx, {datasets}, 'bubble', optionsBubble);
