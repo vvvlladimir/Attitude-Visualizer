@@ -127,21 +127,24 @@ async def main():
 
     """Main asynchronous function to fetch and process telegram messages."""
     async with client:
-        messages = await client.get_messages(f"@{channel_link}", post_limit, add_offset=post_offset)
+        try:
+            messages = await client.get_messages(f"@{channel_link}", post_limit, add_offset=post_offset)
 
-        with open("emoji_scores.json", "r") as file:
-            emoji_scores = json.load(file)
+            with open("emoji_scores.json", "r") as file:
+                emoji_scores = json.load(file)
 
-        data_list = []
-        for message in messages:
-            if message.reactions:
-                data_list.append(save_to_json(message, emoji_scores, channel_link))
-                time.sleep(.3)
-        sum_array = [item["sum"] for item in data_list]
+            data_list = []
+            for message in messages:
+                if message.reactions:
+                    data_list.append(save_to_json(message, emoji_scores, channel_link))
+                    time.sleep(.3)
+            sum_array = [item["sum"] for item in data_list]
 
-        norm_sum = standardize_array(sum_array)
-        write_to_file(data_list, norm_sum, channel_link, post_limit)
+            norm_sum = standardize_array(sum_array)
+            write_to_file(data_list, norm_sum, channel_link, post_limit)
+        except:
+            return
 
-#
+        #
 # with client:
 #     client.loop.run_until_complete(main())
