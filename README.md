@@ -106,6 +106,10 @@ npm i overflow-color
 
 ### Video
 
+
+https://github.com/vvvlladimir/Attitude-Visualizer/assets/57634619/b4ec2fac-a696-414c-b13e-3f5a807ae204
+
+
 ---
 
 ## Contribution Guidelines
