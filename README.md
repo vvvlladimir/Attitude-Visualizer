@@ -119,8 +119,8 @@ npm i overflow-color
 ### Video
 
 
+https://github.com/vvvlladimir/Attitude-Visualizer/assets/57634619/5dce5cad-4b91-4818-bdaa-6a44fb9845e3
 
-https://github.com/vvvlladimir/Attitude-Visualizer/assets/57634619/e290fba3-c79e-470f-a94d-1180d4561466
 
 
 
