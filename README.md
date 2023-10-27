@@ -2,18 +2,19 @@
 
 # Attitude-Visualizer: Emoji-Based Telegram Post Analytics
 
-![Project Logo](https://i.imgur.com/1cP0FBF.png)
+![Project Logo](https://github.com/vvvlladimir/Attitude-Visualizer/assets/57634619/0cb7af72-68fb-4689-a9ef-a5f461556f8e)
 
 ## Table of Contents
 
 - [Overview](#overview)
-- [System Requirements](#system-requirements)
 - [Getting Started](#getting-started)
     - [Installation Steps](#installation-steps)
     - [Configuring Telegram API](#configuring-telegram-api)
 - [Emoji Sentiment Analysis](#emoji-sentiment-analysis)
 - [How to Use](#how-to-use)
 - [Web UI Features](#web-ui-features)
+    - [Enhanced UI (Optional)](#enhanced-ui-optional)
+    - [Video](#video)
 - [Contribution Guidelines](#contribution-guidelines)
 - [License Information](#license-information)
 
@@ -24,13 +25,6 @@
 The Attitude-Visualizer project offers an intuitive way to gauge user reactions to posts on a Telegram channel. It
 fetches messages using the Telegram API, analyzes emojis in reactions, and visualizes the sentiment and popularity of
 each post. This project is built on FastAPI and uses the Telethon library for Telegram API interactions.
-
----
-
-## System Requirements
-
-- Python version 3.8 or above
-- FastAPI library
 
 ---
 
@@ -68,9 +62,8 @@ the [Telethon documentation](https://docs.telethon.dev/en/stable/basic/signing-i
 
 ## Emoji Sentiment Analysis
 
-The project uses a neural network to assign sentiment scores to emojis, which are stored in `emoji_scores.json`. These
-scores range from -1 to 1, representing the emotional tone of each emoji. The program matches fetched emojis with these
-scores to derive an overall sentiment score for each post.
+The project used a neural network to assign sentiment scores to emoji, which are stored in the `emoji_scores.json` file. These
+scores range from -1 to 1, reflecting the emotional tone of each emoji relative to the others. The program matches the selected emoji against these scores to get an overall sentiment score for each post. If you wish, you can edit `emoji_scores.json` and add the emoji you want to use
 
 ---
 
