@@ -2,7 +2,7 @@
 
 # Attitude-Visualizer: Emoji-Based Telegram Post Analytics
 
-![Project Logo](https://github.com/vvvlladimir/Attitude-Visualizer/assets/57634619/0cb7af72-68fb-4689-a9ef-a5f461556f8e)
+![Project Logo](https://github.com/vvvlladimir/Attitude-Visualizer/assets/57634619/8fad3d34-6da7-44f6-a89c-9e910733bc8c)
 
 ## Table of Contents
 
@@ -118,7 +118,10 @@ npm i overflow-color
 
 ### Video
 
-https://github.com/vvvlladimir/Attitude-Visualizer/assets/57634619/b4ec2fac-a696-414c-b13e-3f5a807ae204
+
+
+https://github.com/vvvlladimir/Attitude-Visualizer/assets/57634619/e290fba3-c79e-470f-a94d-1180d4561466
+
 
 
 ---
