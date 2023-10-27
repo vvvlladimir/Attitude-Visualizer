@@ -156,5 +156,5 @@ cython_debug/
 .idea/
 /config.py
 /config.json
-/tg_parcer.session
+/client.session
 /node_modules/

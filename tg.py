@@ -2,13 +2,12 @@ import json
 import time
 from datetime import datetime
 
-import openai
+# import openai
 from telethon import TelegramClient
 
-from config import *
 
-AI = False
-modelName = 'text-davinci-002'
+# AI = False
+# modelName = 'text-davinci-002'
 
 # post_limit = 0
 # post_offset = 0
@@ -17,20 +16,20 @@ modelName = 'text-davinci-002'
 # telegram_hash = ''
 
 
-openai.api_key = api_key
+# openai.api_key = api_key
 
 
-def get_tags(text):
-    """Retrieve tags for a given text using OpenAI API."""
-    if not AI:
-        return "-"
-
-    response = openai.Completion.create(
-        engine=modelName,
-        prompt=f"print one hashtag that describes the text as accurately as possible:\n\n{text}",
-        max_tokens=5
-    )
-    return response.choices[0].text.strip()
+# def get_tags(text):
+#     """Retrieve tags for a given text using OpenAI API."""
+#     if not AI:
+#         return "-"
+#
+#     response = openai.Completion.create(
+#         engine=modelName,
+#         prompt=f"print one hashtag that describes the text as accurately as possible:\n\n{text}",
+#         max_tokens=5
+#     )
+#     return response.choices[0].text.strip()
 
 
 def normalize_array(sum_array):
@@ -70,7 +69,7 @@ def save_to_json(message, emoji_scores, channel_link):
     """Extract relevant data from a message and store it in a dictionary format."""
     reactions_list = []
     reaction_counts = 0
-    tags = get_tags(message.text)
+    # tags = get_tags(message.text)
 
     for reaction_count in message.reactions.results:
         emoticon = reaction_count.reaction.emoticon
@@ -83,7 +82,7 @@ def save_to_json(message, emoji_scores, channel_link):
     return {
         "pc_date": str(message.date.strftime("%d.%m.%Y %H:%M")),
         "pc_text": message.text,
-        "tags": tags,
+        # "tags": tags,
         'tg_link': f"https://t.me/{channel_link}/{message.id}",
         "emojis": {emoji[0]: round(emoji[1] * emoji_scores.get(emoji[0], 1), 2) for emoji in reactions_list},
         "total_reactions": reaction_counts,
@@ -123,7 +122,7 @@ async def main():
     if channel_link.startswith("@"):
         channel_link = channel_link[1:]
 
-    client = TelegramClient('tg_parcer', telegram_id, telegram_hash)
+    client = TelegramClient('client', telegram_id, telegram_hash)
 
     """Main asynchronous function to fetch and process telegram messages."""
     async with client:
@@ -144,7 +143,3 @@ async def main():
             write_to_file(data_list, norm_sum, channel_link, post_limit)
         except:
             return
-
-        #
-# with client:
-#     client.loop.run_until_complete(main())

@@ -62,18 +62,32 @@ the [Telethon documentation](https://docs.telethon.dev/en/stable/basic/signing-i
 
 ## Emoji Sentiment Analysis
 
-The project used a neural network to assign sentiment scores to emoji, which are stored in the `emoji_scores.json` file. These
-scores range from -1 to 1, reflecting the emotional tone of each emoji relative to the others. The program matches the selected emoji against these scores to get an overall sentiment score for each post. If you wish, you can edit `emoji_scores.json` and add the emoji you want to use
+The project used a neural network to assign sentiment scores to emoji, which are stored in the `emoji_scores.json` file.
+These
+scores range from -1 to 1, reflecting the emotional tone of each emoji relative to the others. The program matches the
+selected emoji against these scores to get an overall sentiment score for each post. If you wish, you can
+edit `emoji_scores.json` and add the emoji you want to use
 
 ---
 
 ## How to Use
 
-1. **Launch FastAPI Server**
+1. Launch FastAPI Server
     ```bash
     uvicorn main:app --reload
     ```
-2. **Access Web Interface**: Open the local web UI in your preferred browser.
+2. Open the local web UI in your preferred browser.
+3. Specify all the necessary **data** and click the `start` button
+
+4. At the **first launch**, the `client.session` file will be created in the main directory and you will need to enter
+   your phone number and
+   the code that will come to your telegram account in the terminal. _If you have two-factor authentication via
+   password, you need to enter that as well._
+5. On subsequent runs, you can omit the ID and HASH. If you want to change the account delete the `client.session` file
+   and register with new data
+
+⚠️ **Caution**: `client.session` and `config.json` contain **all access data** for your telegram account. **Never share
+this file!**
 
 ---
 
@@ -98,7 +112,6 @@ npm i overflow-color
 ```
 
 ### Video
-
 
 https://github.com/vvvlladimir/Attitude-Visualizer/assets/57634619/b4ec2fac-a696-414c-b13e-3f5a807ae204
 
