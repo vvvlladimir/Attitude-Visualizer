@@ -44,6 +44,10 @@ each post. This project is built on FastAPI and uses the Telethon library for Te
     ```bash
     pip install -r requirements.txt
     ```
+4. **You may have to install python-multipart**
+    ```bash
+    pip install python-multipart
+    ```
 
 ### Configuring Telegram API
 
@@ -98,7 +102,8 @@ this file!**
 3. **Channel Identifier**: Enter the Telegram channel's tag.
 4. **Start Analysis**: Click "start" to begin fetching and analyzing posts.
 5. **Manage Data**: Download or delete generated JSON files.
-6. **Visualization**: View the sentiment and popularity of posts through a graphical representation.
+6. **Visualization**: View the sentiment and popularity of posts through a graphical representation. The radius of each
+   point shows the number of views of the post
 
 ### Enhanced UI (Optional)
 

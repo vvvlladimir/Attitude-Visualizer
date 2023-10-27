@@ -138,7 +138,7 @@ async def main():
         try:
             messages = await client.get_messages(f"@{channel_link}", post_limit, add_offset=post_offset)
 
-            with open("emoji_scores.json", "r") as file:
+            with open("emoji_scores.json", "r", encoding='utf-8') as file:
                 emoji_scores = json.load(file)
 
             data_list = []
