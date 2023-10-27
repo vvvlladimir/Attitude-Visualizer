@@ -110,14 +110,22 @@ def write_to_file(data_list, norm_sum, channel_link, post_limit):
 
 
 async def main():
-    with open("config.json", "r") as file:
-        data = json.load(file)
+    try:
+        with open("config.json", "r") as file:
+            data = json.load(file)
 
-    telegram_id = data["telegram_id"]
-    telegram_hash = data["telegram_hash"]
-    post_limit = data["post_limit"]
-    post_offset = data["post_offset"]
-    channel_link = data["channel_link"]
+        telegram_id = data.get("telegram_id", "")
+        telegram_hash = data.get("telegram_hash", "")
+        post_limit = data.get("post_limit", "")
+        post_offset = data.get("post_offset", "")
+        channel_link = data.get("channel_link", "")
+
+    except FileNotFoundError:
+        telegram_id = ""
+        telegram_hash = ""
+        post_limit = ""
+        post_offset = ""
+        channel_link = ""
 
     if channel_link.startswith("@"):
         channel_link = channel_link[1:]

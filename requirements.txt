@@ -1,4 +1,5 @@
-fastapi==0.104.0
+fastapi==0.99.1
 starlette==0.31.1
 telethon==1.31.1
 uvicorn==0.23.2
+jinja2==3.1.2
