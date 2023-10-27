@@ -24,8 +24,11 @@ data_folder = Path("data")
 
 
 def read_from_file():
-    with open("config.json", "r") as file:
-        return json.load(file)
+    try:
+        with open("config.json", "r") as file:
+            return json.load(file)
+    except:
+        return ""
 
 
 def get_json_files_array():
@@ -71,14 +74,13 @@ async def submit_form(
 async def list_files():
     json_files = get_json_files_array()
     files = sorted(data_folder.glob('*.json'), key=lambda x: x.stat().st_mtime, reverse=True)
-
     if not files:
         return {"files": json_files,
                 "date": "00.00.0000",
                 "time": "00:00",
                 }
 
-    with files[0].open('r') as f:
+    with files[0].open('r', encoding='utf-8') as f:
         data = json.load(f)
 
     return {

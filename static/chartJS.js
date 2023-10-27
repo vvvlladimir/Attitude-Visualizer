@@ -81,7 +81,7 @@ const optionsBubble = {
                     return colorValue;
                 },
                 beforeFooter: function (context) {
-                    return context[0].raw.sum + " | " + context[0].raw.x.toFixed(3)
+                    return context[0].raw.x.toFixed(3) + " | " + context[0].raw.y + " | " + (context[0].raw.r).toFixed(3)
                 }
             }
         },
@@ -115,9 +115,9 @@ function createDatasets(allData) {
         data: dataObj.data.map(item => ({
             x: item.norm_sum,
             y: item.total_reactions,
+            r: item.norm_views * 3,
             datetime: item.pc_date,
             label: item.pc_text,
-            sum: item.sum,
             emojis: item.emojis
         })),
         // Assign a color to each dataset.

@@ -42,7 +42,7 @@ def normalize_array(sum_array):
 
     normalized_counts = []
     for x in sum_array:
-        normalized_x = (x - min_count) / (max_count - min_count)
+        normalized_x = 1 + ((x - min_count) / (max_count - min_count))
         normalized_counts.append(normalized_x)
 
     return normalized_counts
@@ -90,10 +90,11 @@ def save_to_json(message, emoji_scores, channel_link):
     }
 
 
-def write_to_file(data_list, norm_sum, channel_link, post_limit):
+def write_to_file(data_list, norm_sum, norm_views, channel_link, post_limit):
     """Save the processed data to a JSON file."""
     for idx, item in enumerate(data_list):
         item['norm_sum'] = norm_sum[idx]
+        item['norm_views'] = norm_views[idx]
 
     data_dict = {
         'tgID': channel_link,
@@ -105,7 +106,7 @@ def write_to_file(data_list, norm_sum, channel_link, post_limit):
     }
 
     filename = f'data/{channel_link}_{datetime.today().strftime("%H-%M_%d-%m-%Y")}_{post_limit}.json'
-    with open(filename, 'w') as json_file:
+    with open(filename, 'w', encoding="utf-8") as json_file:
         json.dump(data_dict, json_file, ensure_ascii=False, indent=4)
 
 
@@ -141,13 +142,16 @@ async def main():
                 emoji_scores = json.load(file)
 
             data_list = []
+            views_list = []
             for message in messages:
                 if message.reactions:
                     data_list.append(save_to_json(message, emoji_scores, channel_link))
+                    views_list.append(message.views)
                     time.sleep(.3)
             sum_array = [item["sum"] for item in data_list]
 
             norm_sum = standardize_array(sum_array)
-            write_to_file(data_list, norm_sum, channel_link, post_limit)
+            norm_views = normalize_array(views_list)
+            write_to_file(data_list, norm_sum, norm_views, channel_link, post_limit)
         except:
             return
