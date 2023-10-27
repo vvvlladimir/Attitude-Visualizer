@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi import Form, Response
 from fastapi.responses import FileResponse
@@ -13,7 +14,10 @@ app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.mount("/data", StaticFiles(directory="data"), name="data")
-app.mount("/node_modules", StaticFiles(directory="node_modules"), name="node")
+app.mount("/favicon", StaticFiles(directory="favicon"), name="favicon")
+
+if Path("node_modules").exists() and Path("node_modules").is_dir():
+    app.mount("/node_modules", StaticFiles(directory="node_modules"), name="node")
 
 templates = Jinja2Templates(directory="templates")
 data_folder = Path("data")
@@ -99,3 +103,7 @@ async def delete_file(file_name: str):
         raise HTTPException(status_code=404, detail="File not found")
     file_path.unlink()
     return {"status": "success", "message": f"Deleted {file_name}"}
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="localhost", port=8000)

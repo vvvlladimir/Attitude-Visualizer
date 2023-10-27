@@ -74,7 +74,7 @@ edit `emoji_scores.json` and add the emoji you want to use
 
 1. Launch FastAPI Server
     ```bash
-    uvicorn main:app --reload
+    python main.py
     ```
 2. Open the local web UI in your preferred browser.
 3. Specify all the necessary **data** and click the `start` button
