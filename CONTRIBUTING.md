@@ -17,20 +17,24 @@ guidelines to help you contribute effectively.
 
 ### Making Changes
 
-1. **Create a New Branch**: Always create a new branch for your work.
+1. **Checkout `dev` Branch**: Before creating a new branch, make sure you are in the `dev` branch.
+    ```bash
+    git checkout dev
+    ```
+2. **Create a New Branch**: Always create a new branch for your work.
     ```bash
     git checkout -b feature/your-feature-name
     ```
-2. **Make Your Changes**: Implement your feature or bug fix.
-3. **Commit Changes**: Commit your changes. Write a clear and meaningful commit message describing what you did.
+3. **Make Your Changes**: Implement your feature or bug fix.
+4. **Commit Changes**: Commit your changes. Write a clear and meaningful commit message describing what you did.
     ```bash
     git commit -m "Your detailed commit message"
     ```
-4. **Sync Fork**: Fetch updates from the upstream.
+5. **Sync Fork with `dev`**: Fetch updates from the upstream `dev` branch.
     ```bash
-    git pull upstream main
+    git pull upstream dev
     ```
-5. **Push to Your Fork**: Push your changes to your fork on GitHub.
+6. **Push to Your Fork**: Push your changes to your fork on GitHub.
     ```bash
     git push origin feature/your-feature-name
     ```
@@ -38,9 +42,10 @@ guidelines to help you contribute effectively.
 ### Submitting a Pull Request
 
 1. **Open a Pull Request**: Go to the original Attitude-Visualizer repository and click on "New Pull Request."
-2. **Compare Changes**: Select your feature branch from your fork to be merged into the upstream's main branch.
-3. **Submit the Pull Request**: Provide a comprehensive description of the changes and click on "Create pull request."
-4. **Address Feedback**: If your PR receives feedback, make the required changes and update the PR.
+2. **Base Branch**: Ensure the base branch is set to `dev` as we require all changes to be merged into `dev` first due to its protected status.
+3. **Compare Changes**: Select your feature branch from your fork.
+4. **Submit the Pull Request**: Provide a comprehensive description of the changes and click on "Create pull request."
+5. **Address Feedback**: If your PR receives feedback, make the required changes and update the PR.
 
 ### Code Style and Linting
 
@@ -54,4 +59,3 @@ If your changes involve adding or modifying features, please update the document
 
 By following these guidelines, you'll make it easier for your contributions to be reviewed and merged. Thank you for
 contributing to **Attitude-Visualizer**!
-
