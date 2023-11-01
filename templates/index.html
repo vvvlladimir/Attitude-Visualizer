@@ -42,6 +42,7 @@
             The <span>X</span> coordinate shows the attitude of people to the post.<br>
             The <span>Y</span> coordinate shows the popularity of each post - number of reactions.
         </p>
+
     </div>
     <div class="row chart mt-5 mb-5 flex-grow-1">
         <div class="col-3 settings_menu">
@@ -60,31 +61,31 @@
                 <div class="row ">
                     <div class="col d-flex">
                         <p class="flex-grow-1">Telegram ID:</p>
-                        <input type="number" name="telegram_id" value="{{config.telegram_id}}">
+                        <input type="number" name="telegram_id" value="{{ config.telegram_id }}">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col d-flex">
                         <p class="flex-grow-1">Telegram Hash:</p>
-                        <input type="password" name="telegram_hash" value="{{config.telegram_hash}}">
+                        <input type="password" name="telegram_hash" value="{{ config.telegram_hash }}">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col d-flex">
                         <p class="flex-grow-1">Post Limit:</p>
-                        <input type="number" name="post_limit" value="{{config.post_limit}}">
+                        <input type="number" name="post_limit" value="{{ config.post_limit }}">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col d-flex">
                         <p class="flex-grow-1">Post Offset:</p>
-                        <input type="number" name="post_offset" value="{{config.post_offset}}">
+                        <input type="number" name="post_offset" value="{{ config.post_offset }}">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col d-flex">
                         <p class="flex-grow-1">Channel Link:</p>
-                        <input type="text" name="channel_link" value="{{config.channel_link}}">
+                        <input type="text" name="channel_link" value="{{ config.channel_link }}">
                     </div>
                 </div>
                 <div class="row start-button">
@@ -102,15 +103,16 @@
                 <div class="col">
                     <ul class="files-content">
                         {% for file in files %}
-                        <li class="d-flex">
-                            <a href="/download/{{ file }}" class="flex-grow-1">{{ file }}</a>
-                            <button onclick="deleteFile('{{ file }}')" class="">Delete</button>
-                        </li>
+                            <li class="d-flex">
+                                <a href="/download/{{ file }}" class="flex-grow-1">{{ file }}</a>
+                                <button onclick="deleteFile('{{ file }}')" class="">Delete</button>
+                            </li>
                         {% endfor %}
                     </ul>
                 </div>
             </div>
         </div>
+
         <div class="col-9">
             <canvas id="myChart"></canvas>
         </div>

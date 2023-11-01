@@ -42,7 +42,7 @@ def normalize_array(sum_array):
 
     normalized_counts = []
     for x in sum_array:
-        normalized_x = 1 + ((x - min_count) / (max_count - min_count))
+        normalized_x = ((x - min_count) * (8 - 2) / (max_count - min_count)) + 2
         normalized_counts.append(normalized_x)
 
     return normalized_counts
