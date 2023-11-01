@@ -2,8 +2,6 @@
 
 # Attitude-Visualizer: Emoji-Based Telegram Post Analytics
 
-![Project Logo](https://github.com/vvvlladimir/Attitude-Visualizer/assets/57634619/0cb7af72-68fb-4689-a9ef-a5f461556f8e)
-
 ## Table of Contents
 
 - [Overview](#overview)
@@ -25,6 +23,8 @@
 The Attitude-Visualizer project offers an intuitive way to gauge user reactions to posts on a Telegram channel. It
 fetches messages using the Telegram API, analyzes emojis in reactions, and visualizes the sentiment and popularity of
 each post. This project is built on FastAPI and uses the Telethon library for Telegram API interactions.
+
+![Project Logo](https://github.com/vvvlladimir/Attitude-Visualizer/assets/57634619/0cb7af72-68fb-4689-a9ef-a5f461556f8e)
 
 ---
 
@@ -107,7 +107,7 @@ this file!**
 
 ### Enhanced UI (Optional)
 
-For those who wish to enhance the UI with custom overflow colors, you can optionally use
+For those who wish to enhance the UI with custom overflow colors (works only on Apple devices), you can optionally use
 the [Overflow Color script](https://github.com/dimitrinicolas/overflow-color.git).
 
 To install the script, run:
